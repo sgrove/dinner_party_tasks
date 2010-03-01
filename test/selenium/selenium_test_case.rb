@@ -9,24 +9,18 @@ class SeleniumTestCase < ActionController::IntegrationTest
 
 
   Webrat.configure do |config|
-    # config.mode = :rails
+    puts "configuring webrat"
+    puts "config.mode = #{:selenium}"
     config.mode = :selenium
-    config.application_framework = :external
-    config.selenium_server_address = "saucelabs.com"
-    config.selenium_browser_key = '{"username": "princesspanda", "access-key": "301618e9-e2b4-427a-a121-ac19b501ec66",
-"os": "Windows 2003", "browser": "firefox", "browser-version": "3."}'
-    config.application_address = "http://localhost:3000"
-    config.application_port = "80"
+
+    config.application_framework = :external if ENV["application_framework"] == "external"
+    
+    ["selenium_browser_key", "selenium_server_address", "application_address", "application_port"].each do |key|
+      if ENV[key]
+        config.send((key + '=').to_sym, ENV[key]) if ENV[key]
+      end
+      puts "config.#{key} = #{config.send((key).to_sym)}"
+    end
   end
 
-#  Webrat.configure do |config|
-#    puts "configuring webrat"
-#    puts "config.mode = #{:selenium}"
-#    config.mode = :selenium
-#    ["selenium_browser_key", "selenium_server_address", "application_address", "application_port"].each do |key|
-#      puts "config.#{key} = #{config.send((key).to_sym)}"
-#    end
-#  end
-
 end
-
