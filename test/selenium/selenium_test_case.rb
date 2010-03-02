@@ -13,9 +13,10 @@ class SeleniumTestCase < ActionController::IntegrationTest
     puts "config.mode = #{:selenium}"
     config.mode = :selenium
 
-    config.application_framework = :external if ENV["application_framework"] == "external"
-    
+    config.application_framework = :external if ENV["sauce"]
+
     ["selenium_browser_key", "selenium_server_address", "application_address", "application_port"].each do |key|
+
       if ENV[key]
         config.send((key + '=').to_sym, ENV[key]) if ENV[key]
       end
