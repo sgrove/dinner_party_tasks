@@ -24,4 +24,9 @@ class SeleniumTestCase < ActionController::IntegrationTest
     end
   end
 
+
+  def selenium_eval (to_eval)
+    selenium.get_eval('selenium.browserbot.getCurrentWindow().' + to_eval);
+  end
+
 end
