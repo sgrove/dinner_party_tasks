@@ -1,20 +1,16 @@
 <h1>Listing tasks</h1>
 
-<table>
-    <tr>
-        <th>Title</th>
-    </tr>
+<ul>
 
     <% @tasks.each do |task| %>
         <% css_class = task.active? ? "active" : "inactive" %>
-        <tr class=<%="#{css_class}"%>>
-            <td><%= h task.title %></td>
-            <td><%= link_to 'Show', task %></td>
-            <td><%= link_to 'Edit', edit_task_path(task) %></td>
-            <td><%= link_to 'Destroy', task, :confirm => 'Are you sure?', :method => :delete %></td>
-        </tr>
+        <li class=<%="#{css_class}"%> id=<%="task_#{task.id}"%>>
+            <span class="title"><%= h task.title %></span>
+            <%= link_to 'Edit', edit_task_path(task) %>
+            <%= link_to 'Destroy', task, :confirm => 'Are you sure?', :method => :delete, :id=>"destroy_#{task.id}" %>
+        </li>
     <% end %>
-</table>
+</ul>
 
 <br/>
 

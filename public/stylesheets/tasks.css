@@ -1,7 +1,23 @@
+ul {
+    list-style: none;
+}
+
+li {
+    cursor: pointer;
+}
+
 .active {
     color: red;
 }
 
 .inactive {
     color: green;
+}
+
+#error {
+    display:none;
+    border: 1px solid red;
+    color: red;
+    width: 400px;
+    padding: 5px;
 }
