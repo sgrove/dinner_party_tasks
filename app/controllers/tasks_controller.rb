@@ -1,4 +1,12 @@
 class TasksController < ApplicationController
+
+
+  def finish
+    task = Task.find(params[:id])
+    task.update_attribute("finished_at", Time.now) if task
+
+    render :text=>"Woo hoo!"
+  end
   # GET /tasks
   # GET /tasks.xml
   def index

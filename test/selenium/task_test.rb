@@ -90,4 +90,17 @@ class TaskTest < SeleniumTestCase
   def selenium_js(script)
     "selenium.browserbot.getCurrentWindow()." + script
   end
+
+
+  def test_completing_tasks
+    active = Task.create(:title=>"Active", :active=>true, :minutes=>15)
+    visit tasks_path
+
+    assert_equal "false", selenium_eval("jQuery('li#task_#{active.id}').hasClass('finished')")
+
+    selenium.click "id=finish_#{active.id}", :wait_for => :ajax, :javascript_framework => :jquery
+
+    assert_equal "true", selenium_eval("jQuery('li#task_#{active.id}').hasClass('finished')")
+
+  end
 end

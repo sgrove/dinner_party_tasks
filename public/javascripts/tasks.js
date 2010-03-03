@@ -22,4 +22,26 @@ $(function() {
       draggable.css("top", "");
     }
   });
+
+  $("ul li input[type='checkbox']").click(function() {
+    var $checkbox = $(this);
+    var checkbox_id = $(this).attr("id");
+    var $li = $(this).parent("li");
+    var task_id = checkbox_id.substring(checkbox_id.indexOf('_') + 1);
+
+
+    $.ajax({
+      type: "POST",
+      url: "/tasks/finish",
+      data: "id=" + task_id,
+      async: true,
+      error: function() {
+        alert("FAIL");
+      },
+      success: function(response_data) {
+        $li.addClass('finished');
+        $checkbox.attr("disabled", true)
+      }
+    });
+  })
 });

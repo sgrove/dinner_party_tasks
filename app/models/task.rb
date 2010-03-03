@@ -8,4 +8,8 @@ class Task < ActiveRecord::Base
     words << "#{min} minutes"
     return words
   end
+
+  def finished?
+    !finished_at.nil?
+  end
 end
