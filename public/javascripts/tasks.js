@@ -1,5 +1,6 @@
 $(function() {
 
+
   $("li").draggable({
     axis: 'y',
     revert: function(droppable) {
@@ -44,4 +45,14 @@ $(function() {
       }
     });
   })
+
+
+  $("a.describe").click(function() {
+    var $link = $(this);
+    var li_id = $link.parent("li").attr("id");
+    var task_id = li_id.substring(li_id.indexOf("_") + 1)
+
+    window.open("tasks/" + task_id + "/description", "description", "width=350,height=250");
+
+  });
 });

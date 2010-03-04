@@ -1,5 +1,9 @@
 class TasksController < ApplicationController
 
+  def description
+    task = Task.find(params[:id])
+    render :text=>task.description
+  end
 
   def finish
     task = Task.find(params[:id])

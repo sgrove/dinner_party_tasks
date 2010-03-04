@@ -103,4 +103,20 @@ class TaskTest < SeleniumTestCase
     assert_equal "true", selenium_eval("jQuery('li#task_#{active.id}').hasClass('finished')")
 
   end
+
+  def test_clicking_on_title_pops_up_description
+    mix_dough = Task.create(:title=>"Mix pizza dough", :description=>"Use the stand mixer", :active=>true, :minutes=>15)
+
+    selenium.open "/tasks"
+
+    # Show what happens if you change the name of the window
+    selenium.click "id=describe_#{mix_dough.id}", :wait_for=>:popup, :window=>"description", :select=>true
+#    selenium.select_window("description")
+    assert_contain mix_dough.description   # show what happens if this assertion fails -- the popup window doesn't close and then all subsequent tests will run in the popup window
+    selenium.close
+
+    selenium.select_window("null")
+    assert_contain "Listing tasks"
+
+  end
 end

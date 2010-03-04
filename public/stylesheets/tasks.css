@@ -7,11 +7,11 @@ li {
   position: relative;
 }
 
-.active {
+li.active {
   color: red;
 }
 
-.inactive {
+li.inactive {
   color: green;
 }
 
