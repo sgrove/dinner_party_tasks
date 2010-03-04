@@ -7,8 +7,10 @@
 #   Major.create(:name => 'Daley', :city => cities.first)
 
 
+Task.delete_all
 Task.create(:title=>"Mix pizza dough", :active=>true, :minutes=>15)
-Task.create(:title=>"Make sauce", :active=>true, :minutes=>30)
+Task.create(:title=>"Prep sauce ingredients", :active=>true, :minutes=>15)
+Task.create(:title=>"Simmer sauce", :active=>false, :minutes=>30)
 Task.create(:title=>"Brown sausage", :active=>true, :minutes=>10)
 Task.create(:title=>"Grate cheese", :active=>true, :minutes=>5)
 Task.create(:title=>"Let pizza dough rest", :active=>false, :minutes=>120)
